@@ -1,1 +1,426 @@
-aaa
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>常见问题解答 - FAQ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(45deg, #4CAF50, #45a049);
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    .search-container {
+      padding: 30px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .search-box {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 15px 50px 15px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      font-size: 1.1em;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: #4CAF50;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 1.2em;
+    }
+
+    .faq-container {
+      padding: 30px;
+    }
+
+    .category-section {
+      margin-bottom: 40px;
+    }
+
+    .category-title {
+      font-size: 1.5em;
+      color: #333;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #4CAF50;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .faq-item {
+      background: #f8f9fa;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid #e0e0e0;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+
+    .faq-question {
+      padding: 20px;
+      cursor: pointer;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: #f0f8f0;
+      color: #4CAF50;
+    }
+
+    .faq-question.active {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .faq-toggle {
+      font-size: 1.2em;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+    }
+
+    .faq-answer.active {
+      padding: 20px;
+      max-height: 500px;
+    }
+
+    .faq-answer p {
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .faq-answer ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .faq-answer li {
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    .faq-answer code {
+      background: #e9ecef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: #d63384;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      display: none;
+    }
+
+    .no-results.show {
+      display: block;
+    }
+
+    .contact-section {
+      background: #f8f9fa;
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .contact-section h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .contact-section p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(45deg, #4CAF50, #45a049);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px;
+        border-radius: 10px;
+      }
+      
+      .header {
+        padding: 30px 20px;
+      }
+      
+      .header h1 {
+        font-size: 2em;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .search-container,
+      .faq-container {
+        padding: 20px;
+      }
+      
+      .faq-question {
+        padding: 15px;
+        font-size: 0.95em;
+      }
+      
+      .faq-answer.active {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>
+        <span>❓</span>
+        <span>常见问题解答</span>
+      </h1>
+      <p>快速找到您需要的答案</p>
+    </div>
+
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="搜索问题..." id="searchInput">
+        <span class="search-icon">🔍</span>
+      </div>
+    </div>
+
+    <div class="faq-container">
+      <div class="category-section">
+        <h2 class="category-title">
+          <span>🚀</span>
+          <span>日志相关</span>
+        </h2>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>如何抓取日志</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>参考下面方法：</p>
+            <ul>
+              <li>点击app首页第一项<code>日志抓取</code>，跳转到拨号页面输入<code>“*”（星号键）</code>，注意不是拨号键！</li>
+              <li>手动在拨号页面输入<code>*#*#284#*#*</code></li>
+              <li>设置搜索<code>全部参数与信息</code>，连击几下<code>处理器</code>三个字</li>
+              <li>同时按<code>音量上键</code>和<code>音量下键</code>，直到出现提示开始抓取</li>
+            </ul>
+            <p>开始抓取手机会震动一下，同时通知栏有实时进度。一般需要几秒钟完成。</p>
+          </div>
+        </div>
+        
+         <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>抓取日志无反应</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>抓取日志需要系统app<code>用户反馈</code>，检查以下问题：</p>
+            <ul>
+              <li>是否是官方系统，官改一般精简了<code>用户反馈</code></li>
+              <li>是否手动冻结/卸载了<code>用户反馈</code></li>
+            </ul>
+            <p>只支持小米/红米手机</p>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="no-results" id="noResults">
+        <h3>😔 没有找到相关问题</h3>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <h3>还有其他问题？</h3>
+      <p>如果您没有找到想要的答案，请联系我提供帮助。</p>
+      <a href="tencent://message/?uin=2835082172&Site=&Menu=yes" class="contact-btn">QQ联系</a>
+      <a href="http://www.coolapk.com/u/852927" class="contact-btn" target="_blank">酷安联系</a>
+    </div>
+  </div>
+
+  <script>
+    // Toggle FAQ item
+    function toggleFaq(element) {
+      const answer = element.nextElementSibling;
+      const isActive = element.classList.contains('active');
+      
+      // Close all other FAQ items
+      document.querySelectorAll('.faq-question.active').forEach(item => {
+        if (item !== element) {
+          item.classList.remove('active');
+          item.nextElementSibling.classList.remove('active');
+        }
+      });
+      
+      // Toggle current item
+      if (isActive) {
+        element.classList.remove('active');
+        answer.classList.remove('active');
+      } else {
+        element.classList.add('active');
+        answer.classList.add('active');
+      }
+    }
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const faqItems = document.querySelectorAll('.faq-item');
+    const categoryTitles = document.querySelectorAll('.category-title');
+    const noResults = document.getElementById('noResults');
+
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase().trim();
+      let hasResults = false;
+
+      if (searchTerm === '') {
+        // Show all items
+        faqItems.forEach(item => {
+          item.style.display = 'block';
+        });
+        categoryTitles.forEach(title => {
+          title.style.display = 'flex';
+        });
+        noResults.classList.remove('show');
+        return;
+      }
+
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+        
+        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+          item.style.display = 'block';
+          hasResults = true;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Hide category titles if no items in that category are visible
+      document.querySelectorAll('.category-section').forEach(section => {
+        const visibleItems = section.querySelectorAll('.faq-item[style="display: block;"], .faq-item:not([style*="display: none"])');
+        const title = section.querySelector('.category-title');
+        
+        if (searchTerm !== '' && visibleItems.length === 0) {
+          title.style.display = 'none';
+        } else {
+          title.style.display = 'flex';
+        }
+      });
+
+      // Show/hide no results message
+      if (hasResults) {
+        noResults.classList.remove('show');
+      } else {
+        noResults.classList.add('show');
+      }
+    });
+
+    // Smooth scroll for better UX
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', function() {
+        setTimeout(() => {
+          if (this.classList.contains('active')) {
+            this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>
