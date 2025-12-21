@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f5f5f5;
+    color: #fff;
+    overflow: hidden;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* 开启页面样式 */
+.start-page {
+    width: 100vw;
+    height: 100vh;
+    background: #f5f5f5;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.start-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.start-button {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 
+        0 0 0 20px rgba(102, 126, 234, 0.1),
+        0 0 0 40px rgba(102, 126, 234, 0.05),
+        0 20px 40px rgba(102, 126, 234, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.start-button:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 0 20px rgba(102, 126, 234, 0.15),
+        0 0 0 40px rgba(102, 126, 234, 0.08),
+        0 25px 50px rgba(102, 126, 234, 0.4);
+}
+
+.start-button:active {
+    transform: scale(0.95);
+}
+
+.button-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-text {
+    font-size: 40px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    line-height: 1.4;
+    letter-spacing: 2px;
+}
+
+.start-hint {
+    margin-top: 50px;
+    font-size: 16px;
+    color: #999;
+    letter-spacing: 1px;
+}
+
+/* 祝福页面样式 */
+.blessing-page {
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.blessing-page.active {
+    display: block;
+    opacity: 1;
+}
+
+.start-page .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: #f5f5f5;
+    color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.blessing-page .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.header h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.right-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.music-icon,
+.refresh-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.content {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.blessing-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 100px 20px 20px;
+    z-index: 5;
+}
+
+.blessing {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #ddd;
+    opacity: 0;
+    animation: fadeInStay 0.8s ease-in forwards;
+}
+
+@keyframes fadeInStay {
+    to {
+        opacity: 1;
+    }
+}
+
+.main-text {
+    font-size: 32px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ffd700, #ffed4e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+#fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .start-button {
+        width: 220px;
+        height: 220px;
+        box-shadow: 
+            0 0 0 15px rgba(102, 126, 234, 0.1),
+            0 0 0 30px rgba(102, 126, 234, 0.05),
+            0 15px 30px rgba(102, 126, 234, 0.3);
+    }
+    
+    .button-text {
+        font-size: 32px;
+    }
+    
+    .start-hint {
+        font-size: 14px;
+        margin-top: 40px;
+    }
+    
+    .start-page .header h1 {
+        font-size: 16px;
+    }
+    
+    .main-text {
+        font-size: 24px;
+    }
+    
+    .blessing {
+        font-size: 14px;
+    }
+    
+    .icon {
+        width: 24px;
+        height: 24px;
+        font-size: 16px;
+    }
+    
+    .music-icon,
+    .refresh-icon {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .start-button {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .button-text {
+        font-size: 26px;
+    }
+    
+    .start-hint {
+        font-size: 12px;
+        margin-top: 30px;
+    }
+    
+    .main-text {
+        font-size: 20px;
+    }
+    
+    .blessing {
+        font-size: 12px;
+    }
+}
