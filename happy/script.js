@@ -25,13 +25,120 @@ const blessings = [
     "乐无忧", "常欢喜", "富贵有余"
 ];
 
+// 倒计时功能 - 到2026年1月1日
+let countdownActive = true;
+let countdownInterval;
+
 // 开启按钮点击事件
 const startButton = document.getElementById('startButton');
 const startPage = document.getElementById('startPage');
 const blessingPage = document.getElementById('blessingPage');
+const buttonText = document.getElementById('buttonText');
+const countdownContainer = document.getElementById('countdownContainer');
+const startHint = document.getElementById('startHint');
+
+// 获取音频元素
+const backgroundMusic = document.getElementById('backgroundMusic');
+
+// 播放音乐函数
+function playMusic() {
+    try {
+        backgroundMusic.currentTime = 0; // 从头开始播放
+        backgroundMusic.play().catch(error => {
+            console.log('音乐播放失败:', error);
+        });
+    } catch (error) {
+        console.log('音乐播放出错:', error);
+    }
+}
+
+// 获取倒计时元素
+const daysElement = document.getElementById('days');
+const hoursElement = document.getElementById('hours');
+const minutesElement = document.getElementById('minutes');
+const secondsElement = document.getElementById('seconds');
+const countdownTitle = document.getElementById('countdownTitle');
+
+// 检查URL参数并设置个性化问候
+function setPersonalizedGreeting() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('n');
+    
+    if (name) {
+        countdownTitle.textContent = `你好，${name}`;
+        
+        // 同时设置祝福页面的个性化文字
+        const mainText = document.getElementById('mainText');
+        if (mainText) {
+            mainText.textContent = `希望2026的${name}`;
+        }
+    }
+}
+
+// 目标时间：2026年1月1日 00:00:00
+const targetDate = new Date('2026-01-01T00:00:00').getTime();
+
+// 更新倒计时显示
+function updateCountdown() {
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+    
+    if (timeLeft <= 0) {
+        // 倒计时结束
+        clearInterval(countdownInterval);
+        countdownActive = false;
+        
+        // 隐藏倒计时，显示按钮文字
+        countdownContainer.classList.add('hide');
+        setTimeout(() => {
+            countdownContainer.style.display = 'none';
+            buttonText.classList.add('show');
+            startButton.classList.remove('disabled');
+            startHint.textContent = '点击此处开启你的2026';
+        }, 300);
+        return;
+    }
+    
+    // 计算剩余时间
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+    // 更新显示
+    daysElement.textContent = days.toString().padStart(2, '0');
+    hoursElement.textContent = hours.toString().padStart(2, '0');
+    minutesElement.textContent = minutes.toString().padStart(2, '0');
+    secondsElement.textContent = seconds.toString().padStart(2, '0');
+}
+
+// 启动倒计时
+function startCountdown() {
+    startButton.classList.add('disabled');
+    
+    // 立即更新一次
+    updateCountdown();
+    
+    // 每秒更新
+    countdownInterval = setInterval(updateCountdown, 1000);
+}
+
+// 页面加载时启动倒计时
+window.addEventListener('load', () => {
+    setPersonalizedGreeting();
+    startCountdown();
+});
 
 startButton.addEventListener('click', () => {
-    // 隐藏开启页面
+    // 无论倒计时是否结束，都播放音乐
+    playMusic();
+    
+    // 如果倒计时还在进行，只播放音乐，不跳转页面
+    if (countdownActive) {
+        return;
+    }
+    
+    // 倒计时结束后，播放音乐并跳转页面
     startPage.style.opacity = '0';
     
     setTimeout(() => {

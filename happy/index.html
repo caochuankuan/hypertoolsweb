@@ -13,10 +13,31 @@
         <div class="start-content">
             <div class="start-button" id="startButton">
                 <div class="button-inner">
-                    <div class="button-text">开启<br>2026</div>
+                    <div class="button-text" id="buttonText">开启<br>2026</div>
+                    <div class="countdown-container" id="countdownContainer">
+                        <div class="countdown-title" id="countdownTitle">距离2026还有</div>
+                        <div class="countdown-display">
+                            <div class="time-unit">
+                                <span class="time-value" id="days">00</span>
+                                <span class="time-label">天</span>
+                            </div>
+                            <div class="time-unit">
+                                <span class="time-value" id="hours">00</span>
+                                <span class="time-label">时</span>
+                            </div>
+                            <div class="time-unit">
+                                <span class="time-value" id="minutes">00</span>
+                                <span class="time-label">分</span>
+                            </div>
+                            <div class="time-unit">
+                                <span class="time-value" id="seconds">00</span>
+                                <span class="time-label">秒</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p class="start-hint">点击此处开启你的2026</p>
+            <p class="start-hint" id="startHint">2026年1月1日00:00:00后点击开启</p>
         </div>
     </div>
     
@@ -24,11 +45,17 @@
     <div class="blessing-page" id="blessingPage">
         <div class="content">
             <div class="blessing-container" id="blessingContainer"></div>
-            <h2 class="main-text">希望2026的你...</h2>
+            <h2 class="main-text" id="mainText">希望2026的你...</h2>
         </div>
         
         <canvas id="fireworks"></canvas>
     </div>
+    
+    <!-- 音频元素 -->
+    <audio id="backgroundMusic" preload="auto" loop>
+        <source src="music.m4a" type="audio/mp4">
+        您的浏览器不支持音频播放。
+    </audio>
     
     <script src="script.js"></script>
 </body>
